@@ -1,18 +1,21 @@
-#include <iostream>
-#include <stdlib.h>
-#include <string>
+// FIX remove obsolete include statements
+// #include <iostream>
+// #include <stdlib.h>
+// #include <string>
 #include <unistd.h>
-#include <fstream>
+// #include <fstream>
+#include <bits/stdc++.h>
 //monopoly application.
 
 using namespace std;
 
+// TODO Remove all global variables
 //object declaration
 char introPrompt;     // for intro signup/login
 char newUsername[15]; //signup
 char newPassword[15]; //signup
-string inUsername;    //login
-string inPassword;    //login
+// string inUsername;    //login
+// string inPassword;    //login
 string promptName;
 
 int newConf;
@@ -24,11 +27,10 @@ int jailMoney;
 int loanMoneyP1;
 int loanMoneyP2;
 
+// TODO Remove all global functions
 //functions declared
 void option();
 void intro();
-void signup();
-void login();
 void passGo();
 void otherCrDr();
 void BuyProperty();
@@ -48,107 +50,51 @@ void creditMoneyBank(int x);
 void debitMoneyP1(int x);
 void debitMoneyP2(int x);
 void debitMoneyBank(int x);
-//functions described
 
+//TODO Make a player class
+
+// TODO Move the intro to another file
+#include "intro.h"
+#include "user.h"
 void intro()
 {
-    //system("cls");
-    cout << "\nWelcome to The Digital Game of Monopoly. \n";
-    cout << "This is purely intended for digital payments for the game of Standard Monopoly with Rules specified \n";
-    cout << "U need to signup for the 1st time to use this game.\n";
-    cout << "\n\n      Press 1 for Login \n      Press 2 for Signup\n\n";
+    intro_f();
     cin >> introPrompt;
-
     switch (introPrompt)
     {
     case '1':
-        cout << "OK please wait for a few seconds!!\n";
-        //sleep(2000);
-
-        login();
+        if (login())
+        {
+            system("clear");
+            cout << "----------- Login Procedure completed, Thank You ----------- \n";
+            sleep(2);
+        }
+        else
+        {
+            system("clear");
+            cout << " =====Incorrect Credentials, Please try again...\n";
+            sleep(2);
+            main();
+        }
         break;
 
     case '2':
         signup();
         break;
     default:
-        cout << "\nPlease enter a valid number. For security purposes the process will start again.\n";
-        //sleep(2000);
+        // TODO : Make a common error function
+        // clear the screen and show a warning page maybe?
+        cout << "\nPlease enter a valid number. We'll start again!\n";
+        sleep(2);
         intro();
     }
-    cout << "Login Procedure completed, Thank You\n";
 }
 
-void signup()
-{
-    cout << "\nENTER YOUR USERNAME: ";
-    cin >> newUsername;
-    cout << "\nYou entered the following Username: " << newUsername << endl;
-    cout << "Press 1 to confirm or any other number to re-enter" << endl;
-    cin >> newConf;
-    if (newConf == 1)
-    {
+// TODO Make a function/class for file reading, writing, and validation
 
-        cout << "Enter the password for this account\n";
-        cin >> newPassword;
+//TODO Refactor Account class
 
-        ofstream signupFileU;
-        signupFileU.open("loginU.dat", ios::binary | ios::ate | ios::app);
-        signupFileU << newUsername << " " << newPassword << endl;
-        signupFileU.close();
-
-        //sleep(1000);
-        cout << "You will be shortly redirected to the game \n";
-    }
-    else
-    {
-        cout << "PLEASE WAIT!!\n";
-        //sleep(1000);
-        //system("cls");
-        signup();
-    }
-}
-
-void login()
-{
-
-    cout << "Please enter your username:\n";
-    cin >> inUsername;
-    //sleep(1000);
-    cout << "\nPlease enter your password:\n";
-    cin >> inPassword;
-    //sleep(1000);
-    ifstream loginFileU;
-    loginFileU.open("loginu.dat", ios::binary);
-    size_t pos;
-    string line;
-    string credentials = inUsername + " " + inPassword;
-    while (loginFileU.good())
-    {
-        getline(loginFileU, line);    // get line from file
-        pos = line.find(credentials); // search
-        if (pos != string::npos)      // string::npos is returned if string is not found
-        {
-            cout << "Found! \n";
-            break;
-            loginFileU.close();
-        }
-
-        else
-        {
-            cout << " =====Incorrect Credentials, Please try again...\n";
-            //sleep(1000);
-            //system("cls");
-            cout << "\n\n =====Please re-enter your credentials=====\n\n";
-            //sleep(700);
-            main();
-        }
-    }
-}
-
-//CLASS DECLARED
-
-class account
+class Account
 {
 public:
     int money;
@@ -160,28 +106,25 @@ public:
     void remainingBalance();
 };
 
-account p1;
-account p2;
-account bank;
+// FIX do not declare in global
+Account p1;
+Account p2;
+Account bank;
 //MAIN CODE STARTS HERE
+
+// TODO Remove all sleep statements
 int main()
 {
     //login/sign-up Instance
-
     intro();
-    //intro();
-    //sleep(1500);
-
-    cout << "\n\n\t\t\t /-/-/-/-/GAME LOADING, PLEASE WAIT!/-/-/-/-/\n\n";
-    //sleep(2000);
-    cout << "\t\t\t\t\t=======LOADING=======";
-    //sleep(1000);
-    //system("cls");
+    system("clear");
+    cout << "-----------------LOADING-----------------\n";
+    sleep(2);
+    system("clear");
 
     int numberPlayers;
 
     cout << "Declare number of players and the name of players below\n";
-    //sleep(500);
     cout << "Number of players: ";
     cin >> numberPlayers;
     cout << "\n         Name of Player 1: ";
@@ -190,14 +133,12 @@ int main()
     cin >> p2.person;
     cout << "Thank you, the name registered with the game are: " << p1.person << " and " << p2.person << endl;
     cout << "\n\n The game will begin in a few moments.....\n";
-    //sleep(1000);
 
     bank.declareAssets();
     p1.declareAssets();
     p2.declareAssets();
 
-    //sleep(1000);
-    //system("cls");
+    system("clear");
     cout << "Please define Pass Go value: ";
     cin >> passMoney;
     cout << "\nPlease define Jail Rescue value: ";
@@ -209,7 +150,6 @@ int main()
     state << "Itemised Statements copyright software\n";
     state << "Type					Player1		Player2			Bank\n\n";
     state.close();
-    //sleep(3000);
     option();
 
     return 0;
@@ -220,7 +160,7 @@ void option()
 
     char mainChoice; //main menu choice
 
-    //system("cls");
+    system("clear");
     cout << "\n\tMAIN MENU";
     cout << "\n\n\tA. Buy Property/Utility";           //Log DONE
     cout << "\n\n\tB. Pass GO!";                       //LOG DONE
@@ -235,8 +175,7 @@ void option()
     cout << "\n\n\tK. Itemised Statement";             //log done
     cout << "\n\n\tL. Exit\n";                         //done
     cin >> mainChoice;
-    //sleep(400);
-    //system("cls");
+    system("clear");
     switch (mainChoice)
     {
     case 'a':
@@ -281,20 +220,17 @@ void option()
         itemised();
         break;
     case 'l':
-        //sleep(2000);
-        cout << "Exited \n\t\tCredits- CodeNations";
+        cout << "Exited";
         exit(0);
         break;
     default:
-        cout << "no bro";
-        //sleep(100);
+        cout << "sed life bro";
         option();
     }
 }
 
-void account::declareAssets()
+void Account::declareAssets()
 {
-
     cout << "Please define the initial amount to start with!!\nProcess will be looped for Bank, " << p1.person << " and " << p2.person << " in order.\n";
     cout << "Enter the Cash in hand: ";
     cin >> money;
@@ -313,7 +249,6 @@ void rent()
         p1.remainingBalance();
         creditMoneyP2(debit);
         p2.remainingBalance();
-        //sleep(3000);
 
         ofstream state;
         state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -330,7 +265,6 @@ void rent()
         p2.remainingBalance();
         creditMoneyP1(debit);
         p1.remainingBalance();
-        //sleep(3000);
 
         ofstream state;
         state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -342,7 +276,6 @@ void rent()
     else
     {
         cout << "\n=====Please enter a valid name.\n";
-        //sleep(1000);
         rent();
     }
 }
@@ -377,7 +310,6 @@ void otherCrDr()
             p2.DebitsFromBank();
         }
     }
-    //sleep(1000);
     option();
 }
 
@@ -392,7 +324,6 @@ void passGo()
         p1.remainingBalance();
         debitMoneyBank(passMoney);
         cout << "\nMoney With Bank is : " << bank.money;
-        //sleep(2000);
 
         ofstream state;
         state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -407,7 +338,6 @@ void passGo()
         p2.remainingBalance();
         debitMoneyBank(passMoney);
         cout << "\nMoney With Bank is : " << bank.money;
-        //sleep(2000);
 
         ofstream state;
         state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -419,10 +349,8 @@ void passGo()
     else
     {
         cout << "\n=====Please enter a valid name.\n";
-        //sleep(2000);
         passGo();
     }
-    //sleep(2000);
 }
 
 void buildHouse()
@@ -437,7 +365,6 @@ void buildHouse()
         p1.remainingBalance();
         creditMoneyBank(debit);
         cout << "\nMoney With Bank is : " << bank.money;
-        //sleep(2500);
 
         ofstream state;
         state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -454,7 +381,6 @@ void buildHouse()
         p2.remainingBalance();
         creditMoneyBank(debit);
         cout << "\nMoney With Bank is : " << bank.money;
-        //sleep(2500);
 
         ofstream state;
         state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -466,10 +392,8 @@ void buildHouse()
     else
     {
         cout << "\n=====Please enter a valid name.\n";
-        //sleep(2500);
         buildHouse();
     }
-    //sleep(2000);
 }
 
 void jailRescue()
@@ -483,7 +407,6 @@ void jailRescue()
         p1.remainingBalance();
         creditMoneyBank(jailMoney);
         cout << "\nMoney With Bank is : " << bank.money;
-        //sleep(2500);
 
         ofstream state;
         state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -499,7 +422,6 @@ void jailRescue()
         p2.remainingBalance();
         creditMoneyBank(jailMoney);
         cout << "\nMoney With Bank is : " << bank.money;
-        //sleep(2500);
 
         ofstream state;
         state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -511,10 +433,8 @@ void jailRescue()
     else
     {
         cout << "\n=====Please enter a valid name.\n";
-        //sleep(2500);
         jailRescue();
     }
-    //sleep(2000);
 }
 
 void mortgage()
@@ -538,8 +458,6 @@ void mortgage()
             debitMoneyBank(mort2P1);
             cout << "\nMoney With Bank is : " << bank.money;
 
-            //sleep(4000);
-
             ofstream state;
             state.open("log.dat", ios::binary | ios::app | ios::ate);
             state << endl
@@ -555,12 +473,10 @@ void mortgage()
             cin >> inMortP1;
             inMortP1 = inMortP1 * 0.1;
             cout << "Amount to be paid is: " << inMortP1;
-            //sleep(1000);
             debitMoneyP1(inMortP1);
             p1.remainingBalance();
             creditMoneyBank(inMortP1);
             cout << "\nMoney With Bank is: " << bank.money;
-            //sleep(4000);
 
             ofstream state;
             state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -587,8 +503,6 @@ void mortgage()
             debitMoneyBank(mort2P2);
             cout << "\nMoney With Bank is : " << bank.money;
 
-            //sleep(4000);
-
             ofstream state;
             state.open("log.dat", ios::binary | ios::app | ios::ate);
             state << endl
@@ -604,12 +518,10 @@ void mortgage()
             inMortP2 = inMortP2 * 0.1;
             cout << "\nAmount to be paid is: " << inMortP2 << endl;
 
-            //sleep(1000);
             debitMoneyP2(inMortP2);
             p2.remainingBalance();
             creditMoneyBank(inMortP2);
             cout << "\nMoney With Bank is: " << bank.money;
-            //sleep(4000);
 
             ofstream state;
             state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -622,14 +534,12 @@ void mortgage()
     else
     {
         cout << "\n=====Please enter a valid name.\n";
-        //sleep(1000);
         mortgage();
     }
-    //sleep(1000);
     option();
 }
 
-void account::DebitsFromBank()
+void Account::DebitsFromBank()
 {
     cout << "Enter the money to Debit: ";
     cin >> debit;
@@ -637,7 +547,7 @@ void account::DebitsFromBank()
     cout << "Available Balance: " << money;
 }
 
-void account::CreditsFromBank()
+void Account::CreditsFromBank()
 {
     cout << "Enter the money to Credit: ";
     cin >> credit;
@@ -645,7 +555,7 @@ void account::CreditsFromBank()
     cout << "Available Balance: " << money;
 }
 
-void account::remainingBalance()
+void Account::remainingBalance()
 {
     cout << "Remaining balance for " << person << " is: " << money;
 }
@@ -662,7 +572,6 @@ void BuyProperty()
         p1.remainingBalance();
         creditMoneyBank(debit);
         cout << "\nMoney With Bank is : " << bank.money;
-        //sleep(1000);
 
         ofstream state;
         state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -680,7 +589,6 @@ void BuyProperty()
         p2.remainingBalance();
         creditMoneyBank(debit);
         cout << "\nMoney With Bank is : " << bank.money;
-        //sleep(1000);
 
         ofstream state;
         state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -692,10 +600,8 @@ void BuyProperty()
     else
     {
         cout << "\n=====Please enter a valid name.\n";
-        //sleep(1000);
         BuyProperty();
     }
-    //sleep(1000);
     option();
 }
 
@@ -704,7 +610,6 @@ void viewBalance()
     cout << "\n\t====BALANCE WITH BANK: " << bank.money;
     cout << "\n\n\n\t====BALANCE WITH " << p1.person << " is: " << p1.money;
     cout << "\n\n\n\t====BALANCE WITH " << p2.person << " is: " << p2.money;
-    //sleep(3000);
     option();
 }
 
@@ -728,7 +633,6 @@ void loan()
                 p1.remainingBalance();
                 debitMoneyBank(loanMoneyP1);
                 cout << "\nMoney With Bank is : " << bank.money;
-                //sleep(4000);
                 ofstream state;
                 state.open("log.dat", ios::binary | ios::app | ios::ate);
                 state << endl
@@ -740,7 +644,6 @@ void loan()
             else
             {
                 cout << "You already have a loan!!!";
-                //sleep(3000);
                 option();
             }
         }
@@ -759,7 +662,6 @@ void loan()
             creditMoneyBank(fLoanP1);
             p1.remainingBalance();
             cout << "\nRemaining money with bank: " << bank.money;
-            //sleep(6000);
 
             ofstream state;
             state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -783,7 +685,6 @@ void loan()
                 p2.remainingBalance();
                 debitMoneyBank(loanMoneyP2);
                 cout << "\nMoney With Bank is : " << bank.money;
-                //sleep(4000);
                 ofstream state;
                 state.open("log.dat", ios::binary | ios::app | ios::ate);
                 state << endl
@@ -795,7 +696,6 @@ void loan()
             else
             {
                 cout << "\nYou already have a loan!!!";
-                //sleep(3000);
                 option();
             }
         }
@@ -813,7 +713,6 @@ void loan()
             creditMoneyBank(fLoanP2);
             p2.remainingBalance();
             cout << "\nRemaining money with bank: " << bank.money;
-            //sleep(6000);
 
             ofstream state;
             state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -826,10 +725,8 @@ void loan()
     else
     {
         cout << "\n=====Please enter a valid name.\n\n";
-        //sleep(2500);
         loan();
     }
-    //sleep(2000);
 }
 
 void sellBankPlayer()
@@ -853,8 +750,6 @@ void sellBankPlayer()
             debitMoneyBank(saleP1);
             cout << "\nMoney With Bank is : " << bank.money;
 
-            //sleep(4000);
-
             ofstream state;
             state.open("log.dat", ios::binary | ios::app | ios::ate);
             state << endl
@@ -870,13 +765,11 @@ void sellBankPlayer()
             cin >> saleP1;
 
             cout << "Amount to be paid is: " << saleP1 << endl;
-            //sleep(1000);
             creditMoneyP1(saleP1);
             p1.remainingBalance();
             debitMoneyP2(saleP1);
             cout << "" << endl;
             p2.remainingBalance();
-            //sleep(4000);
 
             ofstream state;
             state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -902,8 +795,6 @@ void sellBankPlayer()
             debitMoneyBank(saleP2);
             cout << "\nMoney With Bank is : " << bank.money;
 
-            //sleep(4000);
-
             ofstream state;
             state.open("log.dat", ios::binary | ios::app | ios::ate);
             state << endl
@@ -918,13 +809,11 @@ void sellBankPlayer()
             cin >> saleP2;
 
             cout << "Amount to be paid is: " << saleP2 << endl;
-            //sleep(1000);
             debitMoneyP1(saleP2);
             p1.remainingBalance();
             creditMoneyP2(saleP2);
             cout << "" << endl;
             p2.remainingBalance();
-            //sleep(4000);
 
             ofstream state;
             state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -937,10 +826,8 @@ void sellBankPlayer()
     else
     {
         cout << "\n=====Please enter a valid name.\n";
-        //sleep(1000);
         sellBankPlayer();
     }
-    //sleep(1000);
     option();
 }
 
@@ -948,7 +835,6 @@ void itemised()
 {
     cout << "\t\t\t\t\tItemised Statement: \n\n";
     system("start notepad++ log.dat");
-    //sleep(1000);
     option();
 }
 
