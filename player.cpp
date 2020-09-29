@@ -1,57 +1,46 @@
 #include "player.h"
-
 using namespace std;
+Player bank;
+// int STARTING_MONEY = 10000;
+// int JAIL_MONEY = 100;
+// int PASS_GO = 100;
+// int NUMBER_OF_PLAYERS = 6;
 
-void Player::creditMoney(int x, Player player)
-{
-    player.money += x;
-}
-
-void Player::debitMoney(int x, Player player)
+void Player::creditMoney(int x, Player &other)
 {
     this->money += x;
-    player.money -= x;
+    other.money -= x;
+}
+
+void Player::debitMoney(int x, Player &other)
+{
+    this->money -= x;
+    other.money += x;
 }
 
 void Player::passGo()
 {
-    string promptName;
-    cout << "Enter the name of player: ";
-    cin >> promptName;
-    if (promptName == p1.person)
-    {
+    int PASS_GO = 100;
+    creditMoney(100, bank);
+    // p.showBalance();
+    cout << "\nMoney With Bank is : " << bank.money;
+    ofstream state;
+    state.open("log.txt", ios::app);
+    state << "\nPass go\t\t\t\t\t+" << PASS_GO << "\t\t\t\t\t\t-" << PASS_GO << endl;
+    state.close();
+    // option();
+}
+void Player::jailRescue(Player &p)
+{
+    int JAIL_MONEY = 100;
+    cout << "\n\nYOU ARE FREE NOW!!!";
+    debitMoney(JAIL_MONEY, bank);
+    // p.showBalance();
+    cout << "\nMoney With Bank is : " << bank.money;
 
-        p1.creditmoneY(100, bank);
-
-        creditMoneyP1(passMoney);
-        p1.remainingBalance();
-        debitMoneyBank(passMoney);
-        cout << "\nMoney With Bank is : " << bank.money;
-
-        ofstream state;
-        state.open("log.dat", ios::binary | ios::app | ios::ate);
-        state << endl
-              << "Pass go\t\t\t\t\t+" << passMoney << "\t\t\t\t\t\t-" << passMoney << endl;
-        state.close();
-        option();
-    }
-    else if (promptName == p2.person)
-    {
-        creditMoneyP2(passMoney);
-        p2.remainingBalance();
-        debitMoneyBank(passMoney);
-        cout << "\nMoney With Bank is : " << bank.money;
-
-        ofstream state;
-        state.open("log.dat", ios::binary | ios::app | ios::ate);
-        state << endl
-              << "Pass go\t\t\t\t\t\t\t\t+" << passMoney << "\t\t\t-" << passMoney << endl;
-        state.close();
-        option();
-    }
-    else
-    {
-        cout << "\n=====Please enter a valid name.\n";
-        passGo();
-    }
+    ofstream state;
+    state.open("log.txt", ios::app);
+    state << "\nJail Rescue\t\t\t\t-" << JAIL_MONEY << "\t\t\t\t\t\t+" << JAIL_MONEY << endl;
+    state.close();
+    // option();
 }

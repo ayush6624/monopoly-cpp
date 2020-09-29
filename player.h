@@ -2,6 +2,7 @@
 #define PLAYER_H
 #include <iostream>
 #include <fstream>
+// #include "game.hpp"
 
 class Player
 {
@@ -13,14 +14,19 @@ public:
     enum Status
     {
         ALIVE,
-        INJAIL,
+        IN_JAIL,
         DEAD
     };
+    Player() {}
 
-    int money;
+    int money = 20000;
     void passGo();
-    void creditMoney(int money, Player player);
-    void debitMoney(int money, Player player);
+    void creditMoney(int money, Player &player);
+    void debitMoney(int money, Player &player);
+    void jailRescue(Player &p);
+    void showBalance();
 };
+
+// bank.money;
 
 #endif
