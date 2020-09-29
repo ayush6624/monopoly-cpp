@@ -13,7 +13,9 @@ bool login()
     cin >> inPassword;
     string credentials = inUsername + " " + inPassword;
     fstream file("loginU.txt");
+
     unordered_set<string> res;
+
     string user, password;
     while (file >> user >> password)
     {
@@ -32,12 +34,12 @@ void signup()
     string newUsername, newPassword;
     int newConf;
     cin >> newUsername;
-    cout << "\nYou entered the following Username: " << newUsername << endl;
+    cout << "\nYou entered the following Username: " << newUsername << "\n";
     cout << "Enter the password for this Account\n";
     cin >> newPassword;
+
     ofstream signupFileU;
     signupFileU.open("loginU.txt", ios::app);
-    signupFileU
-        << newUsername << " " << newPassword << endl;
+    signupFileU << newUsername << " " << newPassword << "\n";
     signupFileU.close();
 }

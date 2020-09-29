@@ -5,17 +5,15 @@
 #include <unistd.h>
 // #include <fstream>
 #include <bits/stdc++.h>
+#include "account.h"
 //monopoly application.
 
 using namespace std;
 
 // TODO Remove all global variables
 //object declaration
-char introPrompt;     // for intro signup/login
 char newUsername[15]; //signup
 char newPassword[15]; //signup
-// string inUsername;    //login
-// string inPassword;    //login
 string promptName;
 
 int newConf;
@@ -53,12 +51,12 @@ void debitMoneyBank(int x);
 
 //TODO Make a player class
 
-// TODO Move the intro to another file
 #include "intro.h"
 #include "user.h"
 void intro()
 {
     intro_f();
+    char introPrompt;
     cin >> introPrompt;
     switch (introPrompt)
     {
@@ -93,18 +91,6 @@ void intro()
 // TODO Make a function/class for file reading, writing, and validation
 
 //TODO Refactor Account class
-
-class Account
-{
-public:
-    int money;
-    string person;
-    void getName();
-    void declareAssets();
-    void DebitsFromBank();
-    void CreditsFromBank();
-    void remainingBalance();
-};
 
 // FIX do not declare in global
 Account p1;
@@ -229,14 +215,6 @@ void option()
     }
 }
 
-void Account::declareAssets()
-{
-    cout << "Please define the initial amount to start with!!\nProcess will be looped for Bank, " << p1.person << " and " << p2.person << " in order.\n";
-    cout << "Enter the Cash in hand: ";
-    cin >> money;
-    cout << endl;
-}
-
 void rent()
 {
     cout << "Enter the name of player From Which Rent is to be collected: ";
@@ -313,45 +291,45 @@ void otherCrDr()
     option();
 }
 
-void passGo()
-{
-    cout << "Enter the name of player: ";
-    cin >> promptName;
-    if (promptName == p1.person)
-    {
+#include "game.h"
+// void passGo()
+// {
+//     cout << "Enter the name of player: ";
+//     cin >> promptName;
+//     if (promptName == p1.person)
+//     {
+//         creditMoneyP1(passMoney);
+//         p1.remainingBalance();
+//         debitMoneyBank(passMoney);
+//         cout << "\nMoney With Bank is : " << bank.money;
 
-        creditMoneyP1(passMoney);
-        p1.remainingBalance();
-        debitMoneyBank(passMoney);
-        cout << "\nMoney With Bank is : " << bank.money;
+//         ofstream state;
+//         state.open("log.dat", ios::binary | ios::app | ios::ate);
+//         state << endl
+//               << "Pass go\t\t\t\t\t+" << passMoney << "\t\t\t\t\t\t-" << passMoney << endl;
+//         state.close();
+//         option();
+//     }
+//     else if (promptName == p2.person)
+//     {
+//         creditMoneyP2(passMoney);
+//         p2.remainingBalance();
+//         debitMoneyBank(passMoney);
+//         cout << "\nMoney With Bank is : " << bank.money;
 
-        ofstream state;
-        state.open("log.dat", ios::binary | ios::app | ios::ate);
-        state << endl
-              << "Pass go\t\t\t\t\t+" << passMoney << "\t\t\t\t\t\t-" << passMoney << endl;
-        state.close();
-        option();
-    }
-    else if (promptName == p2.person)
-    {
-        creditMoneyP2(passMoney);
-        p2.remainingBalance();
-        debitMoneyBank(passMoney);
-        cout << "\nMoney With Bank is : " << bank.money;
-
-        ofstream state;
-        state.open("log.dat", ios::binary | ios::app | ios::ate);
-        state << endl
-              << "Pass go\t\t\t\t\t\t\t\t+" << passMoney << "\t\t\t-" << passMoney << endl;
-        state.close();
-        option();
-    }
-    else
-    {
-        cout << "\n=====Please enter a valid name.\n";
-        passGo();
-    }
-}
+//         ofstream state;
+//         state.open("log.dat", ios::binary | ios::app | ios::ate);
+//         state << endl
+//               << "Pass go\t\t\t\t\t\t\t\t+" << passMoney << "\t\t\t-" << passMoney << endl;
+//         state.close();
+//         option();
+//     }
+//     else
+//     {
+//         cout << "\n=====Please enter a valid name.\n";
+//         passGo();
+//     }
+// }
 
 void buildHouse()
 {
@@ -537,27 +515,6 @@ void mortgage()
         mortgage();
     }
     option();
-}
-
-void Account::DebitsFromBank()
-{
-    cout << "Enter the money to Debit: ";
-    cin >> debit;
-    money = money - debit;
-    cout << "Available Balance: " << money;
-}
-
-void Account::CreditsFromBank()
-{
-    cout << "Enter the money to Credit: ";
-    cin >> credit;
-    money = money + credit;
-    cout << "Available Balance: " << money;
-}
-
-void Account::remainingBalance()
-{
-    cout << "Remaining balance for " << person << " is: " << money;
 }
 
 void BuyProperty()
@@ -866,3 +823,13 @@ void debitMoneyBank(int x)
 {
     bank.money = bank.money - x;
 }
+
+// void creditMoney(int x, const Player &p)
+// {
+//     p.money = p.money + x;
+// }
+
+// void debitMoney(int x, const Player &p)
+// {
+//     p.money = p.money + x;
+// }
