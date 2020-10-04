@@ -1,11 +1,7 @@
 // FIX remove obsolete include statements
-// #include <iostream>
-// #include <stdlib.h>
-// #include <string>
 #include <unistd.h>
-// #include <fstream>
 #include <bits/stdc++.h>
-#include "account.h"
+#include "account.hpp"
 //monopoly application.
 
 using namespace std;
@@ -51,8 +47,8 @@ void debitMoneyBank(int x);
 
 //TODO Make a player class
 
-#include "intro.h"
-#include "user.h"
+#include "intro.hpp"
+#include "user.hpp"
 void intro()
 {
     intro_f();

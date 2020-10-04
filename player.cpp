@@ -1,4 +1,4 @@
-#include "player.h"
+#include "player.hpp"
 using namespace std;
 Player bank;
 // int STARTING_MONEY = 10000;
