@@ -1,5 +1,5 @@
 #include "game.hpp"
-
+#include "constants.hpp"
 using namespace std;
 // int NUMBER_OF_PLAYERS = 6;
 vector<Player> players;
@@ -20,6 +20,7 @@ void option()
     char mainChoice; //main menu choice
 
     system("clear");
+    cout << constants::JAIL_MONEY << "\n";
     cout << "\n\tMAIN MENU";
     cout << "\n\n\tA. Buy Property/Utility";           //Log DONE
     cout << "\n\n\tB. Pass GO!";                       //LOG DONE
