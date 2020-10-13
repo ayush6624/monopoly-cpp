@@ -2,7 +2,7 @@
 #define PLAYER_H
 #include <iostream>
 #include <fstream>
-// #include "game.hpp"
+#include "constants.hpp"
 
 class Player
 {
@@ -17,14 +17,16 @@ public:
         IN_JAIL,
         DEAD
     };
-    Player() {}
-
+    Player(std::string s);
     int money = 20000;
     void passGo();
     void creditMoney(int money, Player &player);
     void debitMoney(int money, Player &player);
-    void jailRescue(Player &p);
+    void jailRescue();
+    void rent();
+    void buildHouse();
     void showBalance();
+    void viewBalance();
 };
 
 // bank.money;
