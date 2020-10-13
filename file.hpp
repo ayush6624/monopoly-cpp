@@ -6,16 +6,18 @@
 class File
 {
 private:
-    std::string filenmae;
+    std::string fileName;
     std::string operation;
-    std::ofstream file;
+    std::fstream fileWrite;
+    std::fstream fileRead;
+    std::fstream fileLog;
 
 public:
-    File(std::string fileName);
+    File(std::string);
     ~File();
-void read();
+    std::string read();
     void write(std::string);
-    // bool compare();
+    void log(std::string, std::string);
 };
 
 #endif

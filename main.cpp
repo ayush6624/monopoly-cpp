@@ -23,7 +23,7 @@ int loanMoneyP2;
 
 // TODO Remove all global functions
 //functions declared
-void option();
+// void option();
 void intro();
 void passGo();
 void otherCrDr();
@@ -60,13 +60,13 @@ void intro()
         if (login())
         {
             system("clear");
-            cout << "----------- Login Procedure completed, Thank You ----------- \n";
-            sleep(2);
+            cout << "-----------Login Procedure completed, Thank You----------- \n";
+            sleep(0.5);
         }
         else
         {
             system("clear");
-            cout << " =====Incorrect Credentials, Please try again...\n";
+            cout << "-----------Incorrect Credentials, Please try again-----------\n";
             sleep(2);
             main();
         }
@@ -103,8 +103,8 @@ int main()
     intro();
     system("clear");
     cout << "-----------------LOADING-----------------\n";
-    sleep(2);
-    system("clear");
+    sleep(0.5);
+    // system("clear");
     option();
 
     // int numberPlayers;

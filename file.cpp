@@ -3,21 +3,32 @@ using namespace std;
 
 File::File(string fileName)
 {
-    cout << "constructor\n";
-    file.open(fileName);
+    fileRead.open(fileName);
+    fileWrite.open(fileName, ios::app);
+    fileLog.open("log.txt", ios::app);
 }
-
+// TODO log after players login and logout
 File::~File()
 {
-    cout << "destructorr\n";
-    file.close();
+    fileWrite.close();
+    fileRead.close();
+    fileLog.close();
 }
-void File::read()
+
+string File::read()
 {
+    string ans = "", line;
+    while (getline(fileRead, line))
+        ans += line + "\n";
+    return ans;
 }
 
 void File::write(string str)
 {
-    file.open(filenmae, ios::app);
-    file << str << "\n";
+    fileWrite << str << "\n";
+}
+
+void File::log(string eventType, string str)
+{
+    fileLog << eventType << "\t\t\t\t" << str << "\n";
 }
