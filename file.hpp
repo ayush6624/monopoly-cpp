@@ -2,7 +2,7 @@
 #define FILE_hpp
 #include <iostream>
 #include <fstream>
-
+#include "constants.hpp"
 class File
 {
 private:
@@ -13,7 +13,7 @@ private:
     std::fstream fileLog;
 
 public:
-    File(std::string);
+    File(std::string s = "");
     ~File();
     std::string read();
     void write(std::string);

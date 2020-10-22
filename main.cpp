@@ -1,7 +1,6 @@
 // FIX remove obsolete include statements
 #include <unistd.h>
 #include <bits/stdc++.h>
-#include "account.hpp"
 //monopoly application.
 
 using namespace std;
@@ -139,49 +138,6 @@ int main()
     return 0;
 }
 
-// void rent()
-// {
-//     cout << "Enter the name of player From Which Rent is to be collected: ";
-//     cin >> promptName;
-//     if (promptName == p1.person)
-//     {
-//         cout << "\n\nEnter the Rent of the Property:  " << endl;
-//         cin >> debit;
-//         debitMoneyP1(debit);
-//         p1.remainingBalance();
-//         creditMoneyP2(debit);
-//         p2.remainingBalance();
-
-//         ofstream state;
-//         state.open("log.dat", ios::binary | ios::app | ios::ate);
-//         state << endl
-//               << "Rent \t\t\t\t\t-" << debit << "\t\t\t+" << debit << endl;
-//         state.close();
-//         option();
-//     }
-//     else if (promptName == p2.person)
-//     {
-//         cout << "\n\nEnter the Rent of the Property:   ";
-//         cin >> debit;
-//         debitMoneyP2(debit);
-//         p2.remainingBalance();
-//         creditMoneyP1(debit);
-//         p1.remainingBalance();
-
-//         ofstream state;
-//         state.open("log.dat", ios::binary | ios::app | ios::ate);
-//         state << endl
-//               << "Rent \t\t\t\t\t+" << debit << "\t\t\t-" << debit << endl;
-//         state.close();
-//         option();
-//     }
-//     else
-//     {
-//         cout << "\n=====Please enter a valid name.\n";
-//         rent();
-//     }
-// }
-
 // void otherCrDr()
 // {
 
@@ -216,48 +172,6 @@ int main()
 // }
 
 // #include "game.h"
-// void buildHouse()
-// {
-//     cout << "Enter the name of player: ";
-//     cin >> promptName;
-//     if (promptName == p1.person)
-//     {
-//         cout << "\n\nEnter the price of the House/Hotel:  ";
-//         cin >> debit;
-//         debitMoneyP1(debit);
-//         p1.remainingBalance();
-//         creditMoneyBank(debit);
-//         cout << "\nMoney With Bank is : " << bank.money;
-
-//         ofstream state;
-//         state.open("log.dat", ios::binary | ios::app | ios::ate);
-//         state << endl
-//               << "House/Hotel\t\t\t\t-" << debit << "\t\t\t\t\t\t+" << debit << endl;
-//         state.close();
-//         option();
-//     }
-//     else if (promptName == p2.person)
-//     {
-//         cout << "\n\nEnter the price of the House/Hotel:  ";
-//         cin >> debit;
-//         debitMoneyP2(debit);
-//         p2.remainingBalance();
-//         creditMoneyBank(debit);
-//         cout << "\nMoney With Bank is : " << bank.money;
-
-//         ofstream state;
-//         state.open("log.dat", ios::binary | ios::app | ios::ate);
-//         state << endl
-//               << "House/Hotel\t\t\t\t\t\t\t-" << debit << "\t\t\t+" << debit << endl;
-//         state.close();
-//         option();
-//     }
-//     else
-//     {
-//         cout << "\n=====Please enter a valid name.\n";
-//         buildHouse();
-//     }
-// }
 
 // void mortgage()
 // {
@@ -361,50 +275,7 @@ int main()
 //     option();
 // }
 
-// void BuyProperty()
-// {
-//     cout << "Enter the name of player: ";
-//     cin >> promptName;
-//     if (promptName == p1.person)
-//     {
-//         cout << "\n\nEnter the price of the property:  ";
-//         cin >> debit;
-//         debitMoneyP1(debit);
-//         p1.remainingBalance();
-//         creditMoneyBank(debit);
-//         cout << "\nMoney With Bank is : " << bank.money;
 
-//         ofstream state;
-//         state.open("log.dat", ios::binary | ios::app | ios::ate);
-//         state << endl
-//               << "Property Buy\t\t\t-" << debit << "\t\t\t"
-//               << "\t\t\t+" << debit << endl;
-//         state.close();
-//         option();
-//     }
-//     else if (promptName == p2.person)
-//     {
-//         cout << "\n\nEnter the price of the property:  ";
-//         cin >> debit;
-//         debitMoneyP2(debit);
-//         p2.remainingBalance();
-//         creditMoneyBank(debit);
-//         cout << "\nMoney With Bank is : " << bank.money;
-
-//         ofstream state;
-//         state.open("log.dat", ios::binary | ios::app | ios::ate);
-//         state << endl
-//               << "Property Buy\t\t\t\t\t\t-" << debit << "\t\t\t+" << debit << endl;
-//         state.close();
-//         option();
-//     }
-//     else
-//     {
-//         cout << "\n=====Please enter a valid name.\n";
-//         BuyProperty();
-//     }
-//     option();
-// }
 
 // void viewBalance()
 // {
@@ -637,35 +508,4 @@ int main()
 //     cout << "\t\t\t\t\tItemised Statement: \n\n";
 //     system("start notepad++ log.dat");
 //     option();
-// }
-
-// //TODO Comment out
-
-// void creditMoneyP1(int x)
-// {
-//     p1.money = p1.money + x;
-// }
-
-// void creditMoneyP2(int x)
-// {
-//     p2.money = p2.money + x;
-// }
-
-// void creditMoneyBank(int x)
-// {
-//     bank.money = bank.money + x;
-// }
-
-// void debitMoneyP1(int x)
-// {
-//     p1.money = p1.money - x;
-// }
-
-// void debitMoneyP2(int x)
-// {
-//     p2.money = p2.money - x;
-// }
-// void debitMoneyBank(int x)
-// {
-//     bank.money = bank.money - x;
 // }

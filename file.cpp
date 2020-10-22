@@ -31,4 +31,5 @@ void File::write(string str)
 void File::log(string eventType, string str)
 {
     fileLog << eventType << "\t\t\t\t" << str << "\n";
+    
 }

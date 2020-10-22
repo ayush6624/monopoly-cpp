@@ -33,9 +33,7 @@ void option()
         cout << "\n\n\tI. Other Credits/Debits From Bank"; // no log DONE
         cout << "\n\n\tJ. View Balance";                   //DONE
         cout << "\n\n\tK. Itemised Statement";             //log done
-        cout << "\n\n\tL. Exit\n";                         //done
-
-        cout << "\nEnter choice : ";
+        cout << "\n\n\tQ. Exit\n";                         //done
         cin >> mainChoice;
         if (mainChoice == 'q')
             return;
@@ -43,9 +41,9 @@ void option()
         system("clear");
         switch (mainChoice)
         {
-            // case 'a':
-            //     BuyProperty();
-            //     break;
+        case 'a':
+            // getUserChoice().buyProperty();
+            break; 
 
         case 'b':
             getUserChoice().passGo();
