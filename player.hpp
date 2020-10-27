@@ -5,13 +5,17 @@
 #include "constants.hpp"
 #include "file.hpp"
 #include "property.hpp"
+#include "account.hpp"
 
 class Player
 {
 private:
     std::string username;
     std::string password;
-    int money = 20000; // currentBankBalance
+    // int money = 20000; // currentBankBalance
+
+    Account acc;
+
 public:
     enum Status
     {
@@ -19,16 +23,28 @@ public:
         IN_JAIL,
         DEAD
     };
-    Player(std::string s);
+    // Player(std::string s);
+    Player(const std::string &name, const Account &a)
+        : username{name}, acc{a}
+    // initializer list
+    {
+        std::cout << "Constructor for player " << this->username << "\n";
+    }
+    ~Player()
+    {
+        std::cout << "Destructor for player " << this->username << "\n";
+    }
+
     void passGo();
     void creditMoney(int money, Player &player);
     void debitMoney(int money, Player &player);
     void jailRescue();
     void rent();
-    void buyProperty(Player &P);
+    void buyProperty(Property &P);
     void buildHouse();
-    
-    void showBalance();
+    int showBalance();
+
+    // friend int credit(int money, Player &player);
 };
 
 // bank.money;

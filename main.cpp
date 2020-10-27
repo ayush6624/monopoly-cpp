@@ -104,6 +104,7 @@ int main()
     cout << "-----------------LOADING-----------------\n";
     sleep(0.5);
     // system("clear");
+    //  https://stackoverflow.com/questions/30821356/multiple-definition-first-defined-here-errors
     option();
 
     // int numberPlayers;
@@ -274,8 +275,6 @@ int main()
 //     }
 //     option();
 // }
-
-
 
 // void viewBalance()
 // {

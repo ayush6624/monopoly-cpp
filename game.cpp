@@ -3,6 +3,15 @@
 using namespace std;
 // int NUMBER_OF_PLAYERS = 6;
 vector<Player> players;
+
+void makeObj()
+{
+    for (int i = 0; i < 6; i++)
+    {
+        players.push_back(Player("Player #" + to_string(i), (10000)));
+    }
+}
+
 Player getUserChoice()
 {
     int id;
@@ -11,16 +20,21 @@ Player getUserChoice()
     return players[id];
 }
 
+void viewBalance()
+{
+    for (auto i : players)
+    {
+        cout << i.showBalance() << "\n";
+    }
+}
+
 void option()
 {
-    for (int i = 0; i < constants::NUMBER_OF_PLAYERS; i++)
-    {
-        players.push_back(Player("Player #" + to_string(i)));
-    }
+    makeObj();
     char mainChoice; //main menu choice
     while (1)
     {
-        system("clear");
+        // system("clear");
         cout << "\n\tMAIN MENU";
         cout << "\n\n\tA. Buy Property/Utility";           //Log DONE
         cout << "\n\n\tB. Pass GO!";                       //LOG DONE
@@ -38,12 +52,12 @@ void option()
         if (mainChoice == 'q')
             return;
 
-        system("clear");
+        // system("clear");
         switch (mainChoice)
         {
         case 'a':
             // getUserChoice().buyProperty();
-            break; 
+            break;
 
         case 'b':
             getUserChoice().passGo();
@@ -73,9 +87,9 @@ void option()
         // case 'i':
         //     otherCrDr();
         //     break;
-        // case 'j':
-        //     viewBalance();
-        //     break;
+        case 'j':
+            viewBalance();
+            break;
         // case 'k':
         //     itemised();
         //     break;

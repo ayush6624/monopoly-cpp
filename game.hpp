@@ -7,8 +7,9 @@
 
 #include "player.hpp"
 
-// std::vector<Player> players;
 
 void option();
+void viewBalance();
+void makeObj();
 
 #endif
