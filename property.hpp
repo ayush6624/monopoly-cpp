@@ -1,27 +1,27 @@
 #ifndef PROPERTY_H
 #define PROPERTY_H
 #include <iostream>
-#include<vector>
+#include <utility>
+#include <vector>
 #include <fstream>
 
 class Property
 {
 private:
-    Property ();
-    // vector<int> price = {100,200,300};
-    int price = 100;
-    int propertySize=0;
-    int noOfProperty=0;
-    int smallProp=0;
-    int mediumProp=0;
-    int largeProp=0;
+    Property();
+    std::pair<int, int> smallProp = {1000, 0}; // price, size
+    std::pair<int, int> mediumProp = {2000, 1};
+    std::pair<int, int> largeProp = {3000, 2};
+    double rentPercentage = 0.1;
+
 public:
-        // Property();
-        void setPropertyList(int n);
-        void getPropertyList();
+    // Property();
+    // void setPropertyList(int n);
+    // void getPropertyList();
+    int getRentPrice(const std::pair<int, int> &prop) { return (int)rentPercentage * prop.first; }
+    int getPropPrice(const std::pair<int, int> &prop) { return prop.first; }
 
-
-    friend class Player;
+    // friend class Player;
 };
 
 #endif

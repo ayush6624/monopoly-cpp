@@ -1,6 +1,7 @@
 #include "player.hpp"
 using namespace std;
-Player bank("Bank", (100000));
+
+vector<Player> players;
 
 int Player::showBalance()
 {
@@ -10,7 +11,7 @@ int Player::showBalance()
 void Player::creditMoney(int x, Player &p)
 {
     cout << "<-- this creditMoney is called test -->\n";
-    acc.addMoney(x);
+    this->acc.addMoney(x);
     p.acc.removeMoney(x);
 }
 
@@ -22,24 +23,24 @@ void Player::debitMoney(int x, Player &p)
 
 void Player::passGo()
 {
-    cout << "--> " << this->acc.getBalanceMoney() << endl;
-    creditMoney(constants::PASS_GO, bank);
-    cout << "\nMoney With Bank is : " << bank.acc.getBalanceMoney() << "\nMoney With " << this->username << " is : " << this->acc.getBalanceMoney() << "\n";
+    cout << "--> " << this->acc.getBalanceMoney() << "\n";
+    creditMoney(constants::PASS_GO, players[0]);
+    cout << "\nMoney With bank is : " << players[0].acc.getBalanceMoney() << "\nMoney With " << this->username << " is : " << this->acc.getBalanceMoney() << "\n";
     // File().log(constants::status[0], "\t\t\t\t\t+" + to_string(constants::PASS_GO) + "\t\t\t\t\t\t" + to_string(constants::PASS_GO) + "\n");
 }
 void Player::jailRescue()
 {
     cout << "\n\nYOU ARE FREE NOW!!!";
-    debitMoney(constants::JAIL_MONEY, bank);
-    cout << "\nMoney With Bank is : " << bank.acc.getBalanceMoney() << "\nMoney With  " << this->username << " is : " << this->acc.getBalanceMoney() << "\n";
+    debitMoney(constants::JAIL_MONEY, players[0]);
+    cout << "\nMoney With bank is : " << players[0].acc.getBalanceMoney() << "\nMoney With  " << this->username << " is : " << this->acc.getBalanceMoney() << "\n";
     // File().log("JAIL", "\t\t\t\t\t+" + to_string(constants::JAIL_MONEY) + "\t\t\t\t\t\t" + to_string(constants::JAIL_MONEY) + "\n");
 }
 
 void Player::rent()
 {
     int rent = 300;
-    debitMoney(rent, bank);
-    creditMoney(rent, bank);
+    debitMoney(rent, players[0]);
+    creditMoney(rent, players[0]);
     // File().log(constants::Status::RENT, "RENT", "\t\t\t\t\t+" + to_string(rent) + "\t\t\t\t\t\t" + to_string(rent) + "\n");
     ofstream state;
     state.open("log.dat", ios::binary | ios::app | ios::ate);
@@ -51,9 +52,9 @@ void Player::rent()
 void Player::buildHouse()
 {
     int houseCost = 500;
-    debitMoney(houseCost, bank);
-    creditMoney(houseCost, bank);
-    cout << "\nMoney With Bank is : " << bank.acc.getBalanceMoney();
+    debitMoney(houseCost, players[0]);
+    creditMoney(houseCost, players[0]);
+    cout << "\nMoney With players[0] is : " << players[0].acc.getBalanceMoney();
     ofstream state;
     state.open("log.dat", ios::binary | ios::app | ios::ate);
     state << endl
@@ -68,17 +69,18 @@ void Player::buildHouse()
     // }
 }
 
-void Player::buyProperty(Property &P)
+void Player::buyProperty(Portfolio &x)
 {
     int pay;
     int size;
     cout << "Enter Property size to buy: 0 -> small, 1 -> medium or 2 -> large\n";
     cin >> size;
 
+    x.addProperty(size);
     switch (size)
     {
     case 0:
-        pay = P.price;
+        // pay = getPropPrice();
 
         break;
     case 1:
@@ -93,9 +95,9 @@ void Player::buyProperty(Property &P)
         break;
     }
 
-    debitMoney(pay, bank);
-    creditMoney(pay, bank);
-    cout << "\nMoney With Bank is: " << bank.acc.getBalanceMoney();
+    debitMoney(pay, players[0]);
+    creditMoney(pay, players[0]);
+    cout << "\nMoney With bank is: " << players[0].acc.getBalanceMoney();
     ofstream state;
     state.open("log.dat", ios::binary | ios::app | ios::ate);
     state << endl

@@ -6,6 +6,8 @@
 #include "file.hpp"
 #include "property.hpp"
 #include "account.hpp"
+#include "portfolio.hpp"
+// #include "game.hpp"
 
 class Player
 {
@@ -23,6 +25,10 @@ public:
         IN_JAIL,
         DEAD
     };
+    Player()
+    {
+        std::cout<<"Empty constructor for player" << this->username<<"\n";
+    }
     // Player(std::string s);
     Player(const std::string &name, const Account &a)
         : username{name}, acc{a}
@@ -35,18 +41,19 @@ public:
         std::cout << "Destructor for player " << this->username << "\n";
     }
 
+
     void passGo();
     void creditMoney(int money, Player &player);
     void debitMoney(int money, Player &player);
     void jailRescue();
     void rent();
-    void buyProperty(Property &P);
+    void buyProperty(Portfolio &x);
     void buildHouse();
     int showBalance();
-
     // friend int credit(int money, Player &player);
 };
 
+// Player bank("Bank", (100000));
 // bank.money;
 // parent - trasaction(credit, debit) , child - Operation(jail, rent, buy)
 // player class <----friend----> operation class => retrive 2 things- username + bankbalance from Player

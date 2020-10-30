@@ -2,22 +2,31 @@
 #include "constants.hpp"
 using namespace std;
 // int NUMBER_OF_PLAYERS = 6;
-vector<Player> players;
+// vector<Player> players;
 
 void makeObj()
 {
-    for (int i = 0; i < 6; i++)
+    players.push_back(Player("Bank", (100000)));
+    for (int i = 1; i < 6; i++)
     {
         players.push_back(Player("Player #" + to_string(i), (10000)));
     }
+    auto temp = Portfolio();
+    portfolios.push_back(temp);
+    for (int i = 1; i < 6; i++)
+    {
+        portfolios.push_back(temp);
+    }
 }
 
-Player getUserChoice()
+pair<Player *, Portfolio *> getUserChoice()
 {
     int id;
     cout << "Enter the Player ID: ";
     cin >> id;
-    return players[id];
+    Player *tempPlayer = &players[id];
+    Portfolio *tempPortfolio = &portfolios[id];
+    return {tempPlayer, tempPortfolio};
 }
 
 void viewBalance()
@@ -56,22 +65,26 @@ void option()
         switch (mainChoice)
         {
         case 'a':
-            // getUserChoice().buyProperty();
+        {
+            auto temp = getUserChoice();
+            temp.first->buyProperty(*temp.second);
             break;
+        }
 
         case 'b':
-            getUserChoice().passGo();
+            getUserChoice().first->passGo();
             break;
-        case 'c':
-            getUserChoice().buildHouse();
 
+        case 'c':
+            // getUserChoice<Portfolio>(true)->buildHouse();
             break;
+
         case 'd':
-            getUserChoice().rent();
+            getUserChoice().first->rent();
 
             break;
         case 'e':
-            getUserChoice().jailRescue();
+            getUserChoice().first->jailRescue();
             break;
 
         // case 'f':

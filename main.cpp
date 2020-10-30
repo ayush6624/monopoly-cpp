@@ -176,10 +176,8 @@ int main()
 
 // void mortgage()
 // {
-
 //     cout << "Enter the name of player: ";
 //     cin >> promptName;
-
 //     if (promptName == p1.person)
 //     {
 //         cout << "===1. Mortgage a property\n===2. Unmortgage a property\n";
@@ -194,7 +192,6 @@ int main()
 //             p1.remainingBalance();
 //             debitMoneyBank(mort2P1);
 //             cout << "\nMoney With Bank is : " << bank.money;
-
 //             ofstream state;
 //             state.open("log.dat", ios::binary | ios::app | ios::ate);
 //             state << endl
