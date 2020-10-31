@@ -12,44 +12,41 @@
 class Player
 {
 private:
-    std::string username;
     std::string password;
     // int money = 20000; // currentBankBalance
-
+    int loanValue;
     Account acc;
+    Portfolio portfolio;
 
 public:
+    std::string username;
     enum Status
     {
         ALIVE,
         IN_JAIL,
         DEAD
     };
-    Player()
-    {
-        std::cout<<"Empty constructor for player" << this->username<<"\n";
-    }
-    // Player(std::string s);
-    Player(const std::string &name, const Account &a)
-        : username{name}, acc{a}
     // initializer list
+    Player(const std::string &name, const Account &a, const Portfolio &p)
+        : username{name}, acc{a}, portfolio{p}
     {
-        std::cout << "Constructor for player " << this->username << "\n";
+        // std::cout << "Constructor for player " << this->username << "\n";
     }
     ~Player()
     {
-        std::cout << "Destructor for player " << this->username << "\n";
+        // std::cout << "Destructor for player " << this->username << "\n";
     }
-
 
     void passGo();
     void creditMoney(int money, Player &player);
     void debitMoney(int money, Player &player);
     void jailRescue();
     void rent();
-    void buyProperty(Portfolio &x);
+    void mortgage();
+    void buyProperty();
     void buildHouse();
     int showBalance();
+    void loan();
     // friend int credit(int money, Player &player);
 };
 

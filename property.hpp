@@ -4,23 +4,20 @@
 #include <utility>
 #include <vector>
 #include <fstream>
+#include "constants.hpp"
 
 class Property
 {
 private:
-    Property();
-    std::pair<int, int> smallProp = {1000, 0}; // price, size
-    std::pair<int, int> mediumProp = {2000, 1};
-    std::pair<int, int> largeProp = {3000, 2};
-    double rentPercentage = 0.1;
+    std::vector<std::pair<int, int>> props;
+    // double rentPercentage = 0.1;
 
 public:
-    // Property();
-    // void setPropertyList(int n);
-    // void getPropertyList();
-    int getRentPrice(const std::pair<int, int> &prop) { return (int)rentPercentage * prop.first; }
-    int getPropPrice(const std::pair<int, int> &prop) { return prop.first; }
-
+    Property();
+    void setPropertyList(int n);
+    void getPropertyList();
+    int getPropPrice(const int &size);
+    int getRentPrice(const int &size) { return constants::RENT_PERCENTAGE * getPropPrice(size); }
     // friend class Player;
 };
 

@@ -1,5 +1,5 @@
-monopoly: intro.o main.o user.o player.o game.o file.o account.o
-	g++ intro.o main.o user.o player.o game.o file.o account.o -o monopoly
+monopoly: intro.o main.o user.o player.o game.o file.o account.o portfolio.o property.o
+	g++ intro.o main.o user.o player.o game.o file.o account.o portfolio.o property.o -o monopoly
 
 intro.o: intro.cpp
 	g++ -c intro.cpp
@@ -22,6 +22,12 @@ file.o: file.cpp
 account.o : account.cpp
 	g++ -c account.cpp
 
+portfolio.o: portfolio.cpp
+	g++ -c portfolio.cpp
+
+property.o: property.cpp
+	g++ -c property.cpp
+
 clean:
 	rm -f *.o monopoly
 
@@ -29,4 +35,4 @@ reset:
 	rm -f *.o monopoly *.txt
 
 all:
-	g++ intro.cpp main.cpp user.cpp player.cpp game.cpp file.cpp account.cpp -o monopoly
+	g++ intro.cpp main.cpp user.cpp player.cpp game.cpp file.cpp account.cpp portfolio.cpp property.cpp -o monopoly

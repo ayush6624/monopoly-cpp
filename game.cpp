@@ -6,34 +6,30 @@ using namespace std;
 
 void makeObj()
 {
-    players.push_back(Player("Bank", (100000)));
+    players.push_back(Player("Bank", (100000), (0)));
     for (int i = 1; i < 6; i++)
     {
-        players.push_back(Player("Player #" + to_string(i), (10000)));
-    }
-    auto temp = Portfolio();
-    portfolios.push_back(temp);
-    for (int i = 1; i < 6; i++)
-    {
-        portfolios.push_back(temp);
+        players.push_back(Player("Player #" + to_string(i), (10000), (0)));
     }
 }
 
-pair<Player *, Portfolio *> getUserChoice()
+pair<Player *, int> getUserChoice()
 {
     int id;
     cout << "Enter the Player ID: ";
     cin >> id;
     Player *tempPlayer = &players[id];
-    Portfolio *tempPortfolio = &portfolios[id];
-    return {tempPlayer, tempPortfolio};
+    return {tempPlayer, id};
 }
 
 void viewBalance()
 {
-    for (auto i : players)
+    cout << "\t\tBank's Balance is " << players[0].showBalance() << "\n";
+    for (int i = 1; i < constants::NUMBER_OF_PLAYERS; i++)
     {
-        cout << i.showBalance() << "\n";
+        {
+            cout << "\t\tBalance for " << players[i].username << " : " << players[i].showBalance() << "\n";
+        }
     }
 }
 
@@ -67,7 +63,7 @@ void option()
         case 'a':
         {
             auto temp = getUserChoice();
-            temp.first->buyProperty(*temp.second);
+            temp.first->buyProperty();
             break;
         }
 
@@ -87,16 +83,16 @@ void option()
             getUserChoice().first->jailRescue();
             break;
 
-        // case 'f':
-        //     mortgage();
-
-        //     break;
+        case 'f':
+            getUserChoice().first->mortgage();
+            break;
+        
         // case 'g':
         //     sellBankPlayer();
         //     break;
-        // case 'h':
-        //     loan();
-        //     break;
+        case 'h':
+            getUserChoice().first->loan();
+            break;
         // case 'i':
         //     otherCrDr();
         //     break;

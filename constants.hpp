@@ -9,6 +9,8 @@ namespace constants
     constexpr int JAIL_MONEY = 100;
     constexpr int PASS_GO = 100;
     constexpr int NUMBER_OF_PLAYERS = 6;
+    constexpr double RENT_PERCENTAGE = 0.1;
+    constexpr double MORTGAGE_PERCENT = 0.15;
     // vector<std::string> status = {"PASSGO", "JAIL,"
     // "RENT,"
     // "BUYING",

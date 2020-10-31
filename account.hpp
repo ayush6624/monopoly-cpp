@@ -10,12 +10,11 @@ private:
 public:
     Account()
     {
-        std::cout<<"Empty Account"<<"\n";
+        std::cout << "Empty Account"
+                  << "\n";
     }
     Account(int x)
-        : balanceMoney{x} {
-            std::cout<<"Account constructor" << "\n";
-        };
+        : balanceMoney{x} {};
     int getBalanceMoney();
     void addMoney(int x);
     void removeMoney(int x);
